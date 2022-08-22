@@ -1,4 +1,4 @@
-function changeElement (inputId){
+function changeElement (inputId, btnId){
     const selectedPlayers = document.querySelector('#selected-players');
     const newElement = document.createElement('li');
     const playerName = document.getElementById(inputId).innerText;
@@ -6,11 +6,11 @@ function changeElement (inputId){
     if(a < 5){
         newElement.innerText = playerName;
     selectedPlayers.appendChild(newElement);
+    disabledButton(btnId);
     }
     else{
         alert('you can not choose over 5 player');
     }
-    
 }
 
 function deleteElement(){
@@ -34,54 +34,57 @@ function getElementValue(elementId){
     return elementNumber;
 }
 
+// all players addEventListener here 
+
 document.getElementById('player1-btn').addEventListener('click',function(){
-    disabledButton('player1-btn');
-    changeElement("player1-name");
-    
+    changeElement("player1-name" , "player1-btn");
 })
 
 document.getElementById('player2-btn').addEventListener('click',function(){
-    disabledButton('player2-btn');
-    changeElement('player2-name');
-    
+    changeElement('player2-name', 'player2-btn');
 })
 
 document.getElementById('player3-btn').addEventListener('click',function(){
-    disabledButton('player3-btn');
-    changeElement('player3-name');
-    
+    changeElement('player3-name', 'player3-btn');
 })
 
 document.getElementById('player4-btn').addEventListener('click',function(){
-    disabledButton('player4-btn');
-    changeElement('player4-name');
-    
+    changeElement('player4-name', 'player4-btn');
 })
 
 document.getElementById('player5-btn').addEventListener('click',function(){
-    disabledButton('player5-btn');
-    changeElement('player5-name');
-    
+    changeElement('player5-name', 'player5-btn');
 })
 
 document.getElementById('player6-btn').addEventListener('click',function(){
-    disabledButton('player6-btn');
-    changeElement('player6-name');
-    
+    changeElement('player6-name', 'player6-btn');
 })
+// calculate btn addEventListener here 
 
 document.getElementById('calculate-btn').addEventListener('click', function(){
     const playerCost = document.getElementById('player-cost').value;
     const playerList = document.querySelectorAll('#selected-players li').length;
     const playerExpenseElement = document.getElementById('player-expenses');
-    const totalPlayerExpenses = playerCost * playerList;
-    playerExpenseElement.innerText = totalPlayerExpenses;
-})
 
+    if( playerCost === "" || isNaN(playerCost)){
+        alert('You must filled the amount value in budget')
+    }
+    else{
+        const totalPlayerExpenses = playerCost * playerList;
+    playerExpenseElement.innerText = totalPlayerExpenses;
+    }
+})
+// total calculate evenlistener here 
 document.getElementById('total-btn').addEventListener('click', function(){
     const playerExpenseValue = getElementTextValue("player-expenses");
     const managerExpenseValue = getElementValue('manager-expense');
     const coachExpenseValue = getElementValue('coach-expense'); 
     const totalExpenseElement = document.getElementById('total-expense');
-    totalExpenseElement.innerText = playerExpenseValue + managerExpenseValue + coachExpenseValue;
+
+    if(managerExpenseValue === "" || isNaN(managerExpenseValue) || coachExpenseValue === "" || isNaN(coachExpenseValue)){
+        alert('You must filled the amount value of expenses');
+    }
+    else{
+        totalExpenseElement.innerText = playerExpenseValue + managerExpenseValue + coachExpenseValue;
+    }
 })
