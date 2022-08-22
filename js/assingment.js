@@ -12,13 +12,26 @@ function changeElement (inputId){
     }
     
 }
+
 function deleteElement(){
     const selectedPlayers = document.querySelector('#selected-players');
      selectedPlayers.removeChild(li[5]);
 }
+
 function disabledButton(inputId){
     const eventButton = document.getElementById(inputId); 
     eventButton.setAttribute('disabled', '');
+}
+
+function getElementTextValue(elementId){
+    const elementValue = document.getElementById(elementId).innerText;
+    const elementNumber = parseInt(elementValue);
+    return elementNumber;
+}
+function getElementValue(elementId){
+    const elementValue = document.getElementById(elementId).value;
+    const elementNumber = parseInt(elementValue);
+    return elementNumber;
 }
 
 document.getElementById('player1-btn').addEventListener('click',function(){
@@ -26,26 +39,31 @@ document.getElementById('player1-btn').addEventListener('click',function(){
     changeElement("player1-name");
     
 })
+
 document.getElementById('player2-btn').addEventListener('click',function(){
     disabledButton('player2-btn');
     changeElement('player2-name');
     
 })
+
 document.getElementById('player3-btn').addEventListener('click',function(){
     disabledButton('player3-btn');
     changeElement('player3-name');
     
 })
+
 document.getElementById('player4-btn').addEventListener('click',function(){
     disabledButton('player4-btn');
     changeElement('player4-name');
     
 })
+
 document.getElementById('player5-btn').addEventListener('click',function(){
     disabledButton('player5-btn');
     changeElement('player5-name');
     
 })
+
 document.getElementById('player6-btn').addEventListener('click',function(){
     disabledButton('player6-btn');
     changeElement('player6-name');
@@ -60,3 +78,10 @@ document.getElementById('calculate-btn').addEventListener('click', function(){
     playerExpenseElement.innerText = totalPlayerExpenses;
 })
 
+document.getElementById('total-btn').addEventListener('click', function(){
+    const playerExpenseValue = getElementTextValue("player-expenses");
+    const managerExpenseValue = getElementValue('manager-expense');
+    const coachExpenseValue = getElementValue('coach-expense'); 
+    const totalExpenseElement = document.getElementById('total-expense');
+    totalExpenseElement.innerText = playerExpenseValue + managerExpenseValue + coachExpenseValue;
+})
